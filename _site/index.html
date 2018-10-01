@@ -1,0 +1,2415 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">     
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+    <link href="https://necolas.github.io/normalize.css/4.1.1/normalize.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link href="/assets/css/hamburgers.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/highlight/styles/atom-one-dark.css">
+    <script src="/assets/js/highlight.pack.js"></script>  
+    <link rel="stylesheet" href="/assets/css/q6.css">
+
+    <title>Qencode Documentation</title>
+
+  </head>
+  <body class="q6-page q6-body">
+    <nav class="q6-nav" id="top_menu">
+    <div class="q6-logo">
+        <a href=""><img src="assets/images/logo_dark.png" alt=""></a>
+    </div>
+    <div class="q6-top-menu">
+        <div class="q6-menu-items--left">
+            
+                <a href="/" class="q6-top-menu--active">
+                Documentation
+                </a>
+            
+                <a href="/guides.html" >
+                Guides
+                </a>
+            
+                <a href="/docs.html" >
+                Docs
+                </a>
+            
+                <a href="/library.html" >
+                Library
+                </a>
+            
+                <a href="/opensource.html" >
+                Opensource
+                </a>
+            
+        </div>
+        <div class="q6-menu-items--right">
+            <a href="">Try Demo</a>
+            <button id="menu-button" class="q6-button-default q6-has-submenu">My Account</button>
+            <div id="authorized-menu-fullsize" class="q6-authorized-menu">
+                <a href="" class="q6-menu-item--settings">Settings</a>
+                <a href="" class="q6-menu-item--log-out">Log out</a>
+            </div>
+            <script>
+                $(function () {  
+                    $("#menu-button").on('click', function(){
+                        let authorizedMenu = document.querySelector("#authorized-menu-fullsize");
+                        $(this).toggleClass("q6-opened-menu");
+                        // show menu if it's not shown already 
+                        if (authorizedMenu.style.maxHeight){
+                            authorizedMenu.style.maxHeight = null;
+                            authorizedMenu.style.boxShadow = "0px 0px 0px 0px rgba(0,0,0,0.0)";
+                            //authorizedMenu.style.display = "none";
+                        } else {
+                            //authorizedMenu.style.display = "flex";
+                            authorizedMenu.style.boxShadow = "0px 3px 11px 1px rgba(0,0,0,0.19)";
+                            authorizedMenu.style.maxHeight = authorizedMenu.scrollHeight + "px";
+                        }             
+                    });                           
+                });  
+
+                // close dropdown menu when clicked anywhere outside
+                $(function () {    
+                    $(document).click(function(e) {
+                        if(e.target.id !== "menu-button" && $("#menu-button").hasClass("q6-opened-menu")){
+                            $("#menu-button").trigger("click");
+                        }                        
+                    });
+                });  
+            </script>
+        </div>
+    </div>
+
+    <div class="q6-mobile-navigation">
+        <button id="mobile-menu-button" class="hamburger hamburger--spin" type="button">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>     
+
+        <div id="authorized-menu-mobile" class="q6-authorized-menu">
+            
+                <a href="/">
+                Documentation
+                </a>
+            
+                <a href="/guides.html">
+                Guides
+                </a>
+            
+                <a href="/docs.html">
+                Docs
+                </a>
+            
+                <a href="/library.html">
+                Library
+                </a>
+            
+                <a href="/opensource.html">
+                Opensource
+                </a>
+            
+            <a href="">Settings</a>
+            <a href="">Log out</a>
+        </div>        
+        
+
+        <script>
+            $(function () {   
+                $("#mobile-menu-button").on('click', function(){
+                    $(this).toggleClass("is-active");   
+                    let authorizedMobileMenu = document.querySelector("#authorized-menu-mobile");
+                    // show and hide mobile menu    
+                    if (authorizedMobileMenu.style.maxHeight){
+                        authorizedMobileMenu.style.maxHeight = null;
+                        //authorizedMobileMenu.style.display = "none";
+                        authorizedMobileMenu.style.boxShadow = "0px 0px 0px 0px rgba(0,0,0,0.0)";
+                    } else {
+                        //authorizedMobileMenu.style.display = "flex";
+                        authorizedMobileMenu.style.boxShadow = "0px 3px 11px 1px rgba(0,0,0,0.19)";
+                        authorizedMobileMenu.style.maxHeight = authorizedMobileMenu.scrollHeight + "px";
+                    }                   
+                });    
+            });   
+                
+        </script> 
+    </div>
+
+</nav>   
+
+    <main class="q6-no-header q6-page-content q6-main">
+
+                <div class="q6-api-container">
+
+            <div id="sidebar-switcher" class="q6-api-sidebar__switcher"></div>
+<script>
+    $(function () {   
+        $("#sidebar-switcher").on('click', function(){
+            $("#sidebar").toggleClass("q6-api-open-menu");
+            $(this).toggleClass("q6-api-switcher-activated");
+        });                         
+
+        $(function () {    
+            $(document).click(function(e) {
+                var sidebarClicked = $(e.target).closest("#sidebar").attr('id');
+                var switcherClicked = e.target.id;
+
+                if(switcherClicked != "sidebar-switcher" && !sidebarClicked){
+                    // console.log("switched outsite switcher and outside sidebar");
+
+                    $("#sidebar").removeClass("q6-api-open-menu");
+                    $("#sidebar-switcher").removeClass("q6-api-switcher-activated");                                 
+                }                    
+            });
+        });                      
+    });                                       
+</script>
+
+<div class="q6-api-sidebar" id="sidebar">    
+
+	
+	
+        <section>
+            <h1 class="q6-api-section-title"></h1>
+            <div class="q6-sidebar-menu__links">
+                
+                                                               
+            </div>            
+        </section>
+	
+        <section>
+            <h1 class="q6-api-section-title">Overview</h1>
+            <div class="q6-sidebar-menu__links">
+                
+                
+                    <a class="q6-link" href="#Overview_">Introduction</a> 
+                
+                    <a class="q6-link" href="#Overview_">Quick Start</a> 
+                                                               
+            </div>            
+        </section>
+	
+        <section>
+            <h1 class="q6-api-section-title">Tutorials</h1>
+            <div class="q6-sidebar-menu__links">
+                
+                
+                    <a class="q6-link" href="#Tutorials_">Backend Samples</a> 
+                
+                    <a class="q6-link" href="#Tutorials_">Direct Upload (using tus.io)</a> 
+                
+                    <a class="q6-link" href="#Tutorials_">Using AWS Lamda</a> 
+                
+                    <a class="q6-link" href="#Tutorials_">Website Integration</a> 
+                                                               
+            </div>            
+        </section>
+	
+        <section>
+            <h1 class="q6-api-section-title">API Reference</h1>
+            <div class="q6-sidebar-menu__links">
+                
+                
+                    <a class="q6-link" href="#API Reference_"></a> 
+                
+                    <a class="q6-link" href="#API Reference_"></a> 
+                
+                    <a class="q6-link" href="#API Reference_1">Stitching videos with /v1/start_encode2</a> 
+                
+                    <a class="q6-link" href="#API Reference_3">Adding logo/watermark</a> 
+                
+                    <a class="q6-link" href="#API Reference_4">Creating Transcoding Task</a> 
+                
+                    <a class="q6-link" href="#API Reference_6">Getting Access Token</a> 
+                
+                    <a class="q6-link" href="#API Reference_7">Getting Transcoding Task Status</a> 
+                
+                    <a class="q6-link" href="#API Reference_8">Interval-based Thumbnails</a> 
+                
+                    <a class="q6-link" href="#API Reference_9">Starting Transcoding Process</a> 
+                
+                    <a class="q6-link" href="#API Reference_10">Starting Transcoding Process with Custom Params</a> 
+                                                               
+            </div>            
+        </section>
+	
+        <section>
+            <h1 class="q6-api-section-title">API Clients</h1>
+            <div class="q6-sidebar-menu__links">
+                
+                
+                    <a class="q6-link" href="#API Clients_">Java</a> 
+                
+                    <a class="q6-link" href="#API Clients_">JavaScript</a> 
+                
+                    <a class="q6-link" href="#API Clients_">.Net</a> 
+                
+                    <a class="q6-link" href="#API Clients_">Node.js</a> 
+                
+                    <a class="q6-link" href="#API Clients_">PHP</a> 
+                
+                    <a class="q6-link" href="#API Clients_">Python</a> 
+                                                               
+            </div>            
+        </section>
+	
+        <section>
+            <h1 class="q6-api-section-title">introduction</h1>
+            <div class="q6-sidebar-menu__links">
+                
+                
+                    <a class="q6-link" href="#introduction_1">Close Session</a> 
+                
+                    <a class="q6-link" href="#introduction_2">New Session</a> 
+                                                               
+            </div>            
+        </section>
+	
+        <section>
+            <h1 class="q6-api-section-title">Reference</h1>
+            <div class="q6-sidebar-menu__links">
+                
+                
+                    <a class="q6-link" href="#Reference_1">Some data</a> 
+                
+                    <a class="q6-link" href="#Reference_2">Super great post</a> 
+                                                               
+            </div>            
+        </section>
+	    
+
+    <!--<section>
+        <h1 class="q6-api-section-title">Introduction</h1>
+        <div class="q6-sidebar-menu__links">
+            <a class="q6-link" href="#section_one__problem_one">Problem One</a>              
+            <a class="q6-link" href="#section_one__problem_two">Problem Two</a>                                                 
+        </div>
+    </section>  
+
+    <section>
+        <h1 class="q6-api-section-title">Reference</h1>
+        <div class="q6-sidebar-menu__links">
+            <a class="q6-link" href="#section_two__problem_one">Problem One</a>               
+            <a class="q6-link" href="#section_two__problem_two">Problem Two</a>                                             
+        </div>
+    </section>  -->
+
+    <script>
+
+        // toggle when menu link is selected
+        // q6-sidebar-menu__selected-link
+        // q6-sidebar-menu__links
+        $(function () {  
+            $('.q6-sidebar-menu__links > .q6-link').each(function(index){
+                $(this).click(function(){
+                    // find all selected submenu link and remove selected class
+                    $(".q6-sidebar-menu__links > .q6-sidebar-menu__selected-link").removeClass("q6-sidebar-menu__selected-link");
+                    $(this).addClass("q6-sidebar-menu__selected-link");                                                         
+                });         
+            });                           
+        });                       
+            
+        // scroll when menu links clicked
+        $(function () {
+            $(".q6-sidebar-menu__links > .q6-link").click(function(e) { 
+                e.preventDefault(); 
+
+                try {
+
+                    var extraScroll = 0;
+                    if($('#languageMenuBar').is(':visible')){
+                        extraScroll = 60;
+                    }
+
+                    var dest = $(this).attr('href'); 
+                    $('html,body').animate({
+                        scrollTop: $(dest).offset().top - $("#top_menu").height() - 25 - extraScroll
+                    }, 250, "swing", function() {
+                        // Animation complete.
+                        $("#sidebar").removeClass("q6-api-open-menu");
+                        $("#sidebar-switcher").removeClass("q6-api-switcher-activated");                                    
+                    });   
+                }
+                catch(err) {
+                    console.log(err.message);
+                }    
+
+
+            }); 
+        });                                       
+    </script>
+
+</div>
+
+<script>
+    $(function () {  
+        // calculated position of sidebar based on top menu hight
+
+        updateSidebarTopPosition();
+
+        $(window).resize(updateSidebarTopPosition);                
+
+        function updateSidebarTopPosition(){
+            var topMenuHeight = $('#top_menu').height();
+            $("#sidebar").css("top", topMenuHeight + "px");
+        }
+    });   
+</script>
+
+            <div class="q6-api-content">
+
+                <div id="languageMenuBar"></div>
+
+<div class="q6-api-languages-container">
+    <div></div>
+    <div class="q6-api-languages-menu">
+             
+             
+            
+                <div class="q6-api-languages__button" data-language="curl">cURL</div>
+            
+
+             
+             
+            
+                <div class="q6-api-languages__button" data-language="ruby">Ruby</div>
+            
+
+             
+             
+            
+                <div class="q6-api-languages__button q6-api-languages__button--active" data-language="python">Python</div>
+            
+
+             
+             
+            
+                <div class="q6-api-languages__button" data-language="php">PHP</div>
+            
+
+             
+             
+            
+                <div class="q6-api-languages__button" data-language="javascript">JavaScript</div>
+            
+
+             
+             
+            
+                <div class="q6-api-languages__button" data-language="java">Java</div>
+            
+
+             
+             
+            
+                <div class="q6-api-languages__button" data-language="node">Node.JS</div>
+            
+
+             
+             
+            
+                <div class="q6-api-languages__button" data-language=".net">.NET</div>
+            
+
+                       
+    </div>
+
+    <script>
+        $(function () {
+
+            // set active example based on defaul language
+            var defaultLanguage = $('.q6-api-languages__button--active').attr("data-language");
+            $(`.q6-api-example__language[data-example='${defaultLanguage}']`).addClass('q6-api-example__language--active');
+            //
+
+            var tabLinks = document.querySelectorAll('.q6-api-languages__button');
+
+            tabLinks.forEach(link => link.addEventListener('click', switchTab));
+
+            function switchTab(e){
+
+                $('.q6-api-languages__button--active').removeClass("q6-api-languages__button--active");
+                $('.q6-api-example__language--active').removeClass("q6-api-example__language--active");
+
+                // find what tab link was clicked and show tab content
+                var clickedLink = e.currentTarget;
+                $(clickedLink).addClass('q6-api-languages__button--active');
+
+                var selectedLanguage = clickedLink.getAttribute("data-language");
+
+                $(`.q6-api-example__language[data-example='${selectedLanguage}']`).addClass('q6-api-example__language--active');
+
+            }        
+        });                                             
+    </script>
+
+</div>
+
+                <!--Sections are generated based on documents in collection-->
+
+                
+                
+                    
+                    
+                
+                    
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="Overview_">Introduction</h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="Overview_">Quick Start</h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                
+                    
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="Tutorials_">Backend Samples</h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="Tutorials_">Direct Upload (using tus.io)</h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="Tutorials_">Using AWS Lamda</h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="Tutorials_">Website Integration</h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                
+                    
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Reference_"></h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Reference_"></h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Reference_1">Stitching videos with /v1/start_encode2</h2>
+                            </div>
+                            
+                            
+                            <div class="q6-api-instructions-container">
+                                <div class="q6-api-parameter">/v1/start_encode2</div>
+                            </div> 
+                                  
+
+                            
+                            <div class="q6-api-instructions-container">
+                                <p>This route is for stitching videos using /v1/start_encode2 method.</p>
+                            </div> 
+                                     
+
+                              
+                                <div class="q6-api-instructions-container">
+                                    <h3>attributes</h3>
+                                </div>                              
+                                <div class="q6-attributes-container">
+                                       
+                                    <div class="q6-api__attributes-box">                            
+                                        <div class="q6-api__attributes-content q6-api-instructions-container">
+                                            <div>
+                                                <p>token</p>
+                                                <div>required</div>
+                                            </div>
+                                            <div>
+                                                <p>b49e034d198262f1d5d15ed9f3cb8ee1</p>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>    
+
+                                 
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Request example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="json">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://api.qencode.com/v1/start_encode2 \
+-d task_token=b49e034d198262f1d5d15ed9f3cb8ee1 \
+-d query='{"query": {
+  "stitch": [
+    {"url" : "https://nyc3.digitaloceanspaces.com/qencode2/stitching/batch3/A4070002.mp4"},
+    {"url" : "https://nyc3.digitaloceanspaces.com/qencode2/stitching/batch3/A4070003.mp4", "start_time": "120.0", "duration": "60.57"}
+  ],
+  "format": [
+    {
+      "output": "mp4",
+      "destination": {
+          "url":"s3://s3-eu-west-2.amazonaws.com/qencode-test/stitch/4_clip.mp4",
+          "key":"AKIAIKZIPSJ7SDAIWK4A",
+          "secret":"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",
+          "permissions": "public-read"
+       },
+      "file_extension": "mp4",
+      "size": "640x360",
+      "profile": "baseline",
+      "level": "41"
+      }
+    ]
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                    
+
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Response example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="json">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"error":0,"upload_url":"https:\/\/storage.qencode.com\/v1\/upload_file","task_token":"471272a512d76c22665db9dcee893409"}
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Reference_3">Adding logo/watermark</h2>
+                            </div>
+                            
+                            
+                            <div class="q6-api-instructions-container">
+                                <div class="q6-api-parameter">/v1/create_token</div>
+                            </div> 
+                                  
+
+                            
+                            <div class="q6-api-instructions-container">
+                                <p>This route is for adding logo or watermark to output video. An object describing logo / watermark should be inserted into “format” element.</p>
+                            </div> 
+                                     
+
+                              
+                                <div class="q6-api-instructions-container">
+                                    <h3>attributes</h3>
+                                </div>                              
+                                <div class="q6-attributes-container">
+                                       
+                                    <div class="q6-api__attributes-box">                            
+                                        <div class="q6-api__attributes-content q6-api-instructions-container">
+                                            <div>
+                                                <p>token</p>
+                                                <div>required</div>
+                                            </div>
+                                            <div>
+                                                <p>b49e034d198262f1d5d15ed9f3cb8ee1</p>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>    
+
+                                 
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Request example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"format": [
+ {
+  "output": "mp4",
+   ...
+    "logo": {
+      "source": "https://yourserver.com/watermark.png",
+      "x": 10,
+      "y": 10
+    }
+  }
+]
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                    
+
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Response example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"error":0,"upload_url":"https:\/\/storage.qencode.com\/v1\/upload_file","task_token":"471272a512d76c22665db9dcee893409"}
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "success": false,
+  "result": null
+}
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Reference_4">Creating Transcoding Task</h2>
+                            </div>
+                            
+                            
+                            <div class="q6-api-instructions-container">
+                                <div class="q6-api-parameter">/v1/create_token</div>
+                            </div> 
+                                  
+
+                            
+                            <div class="q6-api-instructions-container">
+                                <p>This route is for creating a transcoding task.</p>
+                            </div> 
+                                     
+
+                              
+                                <div class="q6-api-instructions-container">
+                                    <h3>attributes</h3>
+                                </div>                              
+                                <div class="q6-attributes-container">
+                                       
+                                    <div class="q6-api__attributes-box">                            
+                                        <div class="q6-api__attributes-content q6-api-instructions-container">
+                                            <div>
+                                                <p>token</p>
+                                                <div>required</div>
+                                            </div>
+                                            <div>
+                                                <p>b49e034d198262f1d5d15ed9f3cb8ee1</p>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>    
+
+                                 
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Request example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://api.qencode.com/v1/create_task -d token=76682314a86ed377730873394f8172f2 
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                    
+
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Response example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"error":0,"upload_url":"https:\/\/storage.qencode.com\/v1\/upload_file","task_token":"471272a512d76c22665db9dcee893409"}
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "success": false,
+  "result": null
+}
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Reference_6">Getting Access Token</h2>
+                            </div>
+                            
+                            
+                            <div class="q6-api-instructions-container">
+                                <div class="q6-api-parameter">/v1/create_token</div>
+                            </div> 
+                                  
+
+                            
+                            <div class="q6-api-instructions-container">
+                                <p>This route is for getting the access token.</p>
+                            </div> 
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Request example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://api.qencode.com/v1/access_token -d api_key=5a2a846a26ace 
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Reference_7">Getting Transcoding Task Status</h2>
+                            </div>
+                            
+                            
+                            <div class="q6-api-instructions-container">
+                                <div class="q6-api-parameter">/v1/create_token</div>
+                            </div> 
+                                  
+
+                            
+                            <div class="q6-api-instructions-container">
+                                <p>This route is for inquiring a transcoding task status.</p>
+                            </div> 
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Request example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"format": curl https://api.qencode.com/v1/status -d task_tokens=63adfb01d408081b10440682f3a64114
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://master-79109168ae0711e8b00baa831f35b3f7.qencode.com/v1/status -d task_tokens=d4936f71a242d4b61d790efa217ff9d5
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                    
+
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Response example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="json">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"error":0,"statuses":{"d4936f71a242d4b61d790efa217ff9d5":{"status":"downloading","percent":0,"error":0,"error_description":null,"images":[],"videos":[],"status_url":"https:\/\/master-79109168ae0711e8b00baa831f35b3f7.qencode.com\/v1\/status"}}}
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="json">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"statuses": {"d4936f71a242d4b61d790efa217ff9d5": {"images": [], "status": "encoding", "percent": 8.3743842364532011, "videos": [], "error": 0}}, "error": 0}
+
+{"statuses": {"d4936f71a242d4b61d790efa217ff9d5": {"images": [], "status": "encoding", "percent": 68.965517241379317, "videos": [{"profile": "5a2a846a26e88", "url": "https://nyc3.digitaloceanspaces.com/qencode3/videos/240/498afa68af0711e8b9c60a443ab347fd.mp4", "tag": "video-0-0", "storage": {"format": "mp4", "bucket": "qencode3", "host": "nyc3.digitaloceanspaces.com", "key": "videos/240/498afa68af0711e8b9c60a443ab347fd.mp4", "scheme": "https", "type": "custom_s3", "port": null}, "user_tag": "240p"}], "error": 0}}, "error": 0}
+
+{"images": [], "status": "completed", "percent": 100.0, "videos": [{"profile": "5a2a846a26e88", "url": "https://nyc3.digitaloceanspaces.com/qencode3/videos/240/498afa68af0711e8b9c60a443ab347fd.mp4", "tag": "video-0-0", "storage": {"format": "mp4", "bucket": "qencode3", "host": "nyc3.digitaloceanspaces.com", "key": "videos/240/498afa68af0711e8b9c60a443ab347fd.mp4", "scheme": "https", "type": "custom_s3", "port": null}, "user_tag": "240p"}, {"profile": "5a2a846a26e88", "url": "https://nyc3.digitaloceanspaces.com/qencode3/videos/720/498afa68af0711e8b9c60a443ab347fd.mp4", "tag": "video-2-0", "storage": {"format": "mp4", "bucket": "qencode3", "host": "nyc3.digitaloceanspaces.com", "key": "videos/720/498afa68af0711e8b9c60a443ab347fd.mp4", "scheme": "https", "type": "custom_s3", "port": null}, "user_tag": "720p"}, {"profile": "5a2a846a26e88", "url": "https://nyc3.digitaloceanspaces.com/qencode3/output/360/498afa68af0711e8b9c60a443ab347fd.mp4", "tag": "video-4-0", "storage": {"format": "mp4", "bucket": "qencode3", "host": "nyc3.digitaloceanspaces.com", "key": "output/360/498afa68af0711e8b9c60a443ab347fd.mp4", "scheme": "https", "type": "custom_s3", "port": null}, "user_tag": "360p"}, {"profile": "5a2a846a28604", "url": "https://nyc3.digitaloceanspaces.com/qencode3/hls/498afa68af0711e8b9c60a443ab347fd/playlist.m3u8", "tag": "video-5-1", "storage": {"format": "hls", "bucket": "qencode3", "host": "nyc3.digitaloceanspaces.com", "key": "/hls/498afa68af0711e8b9c60a443ab347fd", "scheme": "https", "type": "custom_s3", "port": null}, "user_tag": "360p"}, {"profile": "5a2a846a28604", "url": "https://nyc3.digitaloceanspaces.com/qencode3/hls/498afa68af0711e8b9c60a443ab347fd/playlist.m3u8", "tag": "video-5-0", "storage": {"format": "hls", "bucket": "qencode3", "host": "nyc3.digitaloceanspaces.com", "key": "/hls/498afa68af0711e8b9c60a443ab347fd", "scheme": "https", "type": "custom_s3", "port": null}, "user_tag": "240p"}, {"profile": "5a2a846a26e88", "url": "https://nyc3.digitaloceanspaces.com/qencode3/output/480/498afa68af0711e8b9c60a443ab347fd.mp4", "tag": "video-3-0", "storage": {"format": "mp4", "bucket": "qencode3", "host": "nyc3.digitaloceanspaces.com", "key": "output/480/498afa68af0711e8b9c60a443ab347fd.mp4", "scheme": "https", "type": "custom_s3", "port": null}, "user_tag": "480p"}, {"profile": "5a2a846a26e88", "url": "https://nyc3.digitaloceanspaces.com/qencode3/videos/1080/498afa68af0711e8b9c60a443ab347fd.mp4", "tag": "video-1-0", "storage": {"format": "mp4", "bucket": "qencode3", "host": "nyc3.digitaloceanspaces.com", "key": "videos/1080/498afa68af0711e8b9c60a443ab347fd.mp4", "scheme": "https", "type": "custom_s3", "port": null}, "user_tag": "1080p"}], "error": 0}}, "error": 0}
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Reference_8">Interval-based Thumbnails</h2>
+                            </div>
+                            
+                            
+                            <div class="q6-api-instructions-container">
+                                <div class="q6-api-parameter">/v1/create_token</div>
+                            </div> 
+                                  
+
+                            
+                            <div class="q6-api-instructions-container">
+                                <p>Example below specifies creation of 320x240 size thumbnails at each 30 seconds of a video. Thumbnails and WebVTT file will be saved into the folder specified in “url” attribute of “destination” object.</p>
+                            </div> 
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Request example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="json">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "output" : "thumbnails",
+  "destination": {
+    "url":"s3://nyc3.digitaloceanspaces.com/qencode3/test/thumb/bbb/",
+    "key":"abcde12345",
+    "secret":"abcde12345",
+    "permissions": "public-read"
+  },
+  "interval": 30,
+  "width" : 320,
+  "height" : 240
+}
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="json">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://api.qencode.com/v1/start_encode2 \
+  -d task_token=b49e034d198262f1d5d15ed9f3cb8ee1 \
+  -d query='{"query": {
+      "source": "https://nyc3.digitaloceanspaces.com/qencode/bbb_sunflower_1080p_60fps_normal_339mb.mp4",
+      "format": [
+        {
+          "output": "mp4",
+          "destination": {
+            "url":"s3://nyc3.digitaloceanspaces.com/qencode3/test/bbb.mp4",
+            "key":"abcde12345",
+            "secret":"abcde12345",
+            "permissions": "public-read"
+          },
+          "file_extension": "mp4",
+          "size": "320x240",
+          "duration": 60
+        },
+        {
+         "output" : "thumbnails",
+         "destination": {
+            "url":"s3://nyc3.digitaloceanspaces.com/qencode3/test/thumb/bbb/",
+            "key":"abcde12345",
+            "secret":"abcde12345",
+            "permissions": "public-read"
+          },
+          "interval": 30,
+          "width" : 320,
+          "height" : 240
+        }
+      ]
+    }
+  } 
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                    
+
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Response example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="json">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"error":0,"upload_url":"https:\/\/storage.qencode.com\/v1\/upload_file","task_token":"471272a512d76c22665db9dcee893409"}
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Reference_9">Starting Transcoding Process</h2>
+                            </div>
+                            
+                            
+                            <div class="q6-api-instructions-container">
+                                <div class="q6-api-parameter">/v1/create_token</div>
+                            </div> 
+                                  
+
+                            
+                            <div class="q6-api-instructions-container">
+                                <p>This route is for starting the transcoding process.</p>
+                            </div> 
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Request example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="json">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://api.qencode.com/v1/start_encode \
+  -d task_token=63adfb01d408081b10440682f3a64114 \
+  -d uri="https://qa.qencode.com/static/test_mini.mp4" \
+  -d start_time=10 \
+  -d duration=20 \
+  -d profiles=5a2a846a26e88,5a2a846a28604 \
+  -d transfer_method=5aa2875489681 \
+  -d payload="12345" \
+  -d output_path_variables='{"category":"test_videos","video_name":"12345"}'
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                    
+
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Response example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="json">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"error":0,"status_url":"https:\/\/api.qencode.com\/v1\/status"}
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Reference_10">Starting Transcoding Process with Custom Params</h2>
+                            </div>
+                            
+                            
+                            <div class="q6-api-instructions-container">
+                                <div class="q6-api-parameter">/v1/create_token</div>
+                            </div> 
+                                  
+
+                            
+                            <div class="q6-api-instructions-container">
+                                <p>This route is for starting transcoding process with custom parameters.</p>
+                            </div> 
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Request example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="json">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://api.qencode.com/v1/start_encode2 \
+   -d task_token=b49e034d198262f1d5d15ed9f3cb8ee1 \
+   -d payload="12345" \
+   -d query='{"query": {
+   "source": "https://qa.qencode.com/static/test_mini.mp4",
+   "format": [
+     {
+       "output": "mp4",
+       "destination": {
+         "url":"s3://nyc3.digitaloceanspaces.com/qencode3/test/test_mini.mp4",
+         "key":"abcde12345",
+         "secret":"abcde12345",
+         "permissions": "public-read"
+       },
+             "framerate": "29.97",
+             "keyframe": "25",
+             "file_extension": "mp4",
+             "size": "360x240",
+             "video_codec_parameters": {
+               "vprofile": "baseline",
+               "level": "31",
+               "coder": "0",
+               "flags2": "-bpyramid+fastpskip-dct8x8",
+               "partitions": "+parti8x8+parti4x4+partp8x8+partb8x8",
+               "directpred": "2",
+               "me_method": "hex"
+             },
+             "start_time": "10",
+             "duration": "20",
+             "audio_bitrate": "64",
+             "audio_sample_rate": "44100",
+             "audio_channels_number": "2"
+           }
+         ]
+       }
+      }
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                    
+
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Response example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="json">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"error":0,"status_url":"https:\/\/api.qencode.com\/v1\/status"}
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                
+                    
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Clients_">Java</h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Clients_">JavaScript</h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Clients_">.Net</h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Clients_">Node.js</h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Clients_">PHP</h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="API Clients_">Python</h2>
+                            </div>
+                            
+                                  
+
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                
+                    
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="introduction_1">Close Session</h2>
+                            </div>
+                            
+                                  
+
+                            
+                            <div class="q6-api-instructions-container">
+                                <p>Lorem ipsum dolor sit amet, <span class="q6-blue-text">consectetur</span> adipisicing elit. Fugit cupiditate numquam, totam nisi reprehenderit <span class="q6-blue-text">consectetur</span> ducimus sequi. Voluptates, ullam eum, odio explicabo vero necessitatibus earum consequuntur</p>
+                            </div> 
+                                     
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="introduction_2">New Session</h2>
+                            </div>
+                            
+                            
+                            <div class="q6-api-instructions-container">
+                                <div class="q6-api-parameter">/v1/access_token</div>
+                            </div> 
+                                  
+
+                            
+                            <div class="q6-api-instructions-container">
+                                <p>Lorem ipsum dolor sit amet, <span class="q6-blue-text">consectetur</span> adipisicing elit. Fugit cupiditate numquam, totam nisi reprehenderit <span class="q6-blue-text">consectetur</span> ducimus sequi. Voluptates, ullam eum, odio explicabo vero necessitatibus</p>
+                            </div> 
+                                     
+
+                              
+                                <div class="q6-api-instructions-container">
+                                    <h3>attributes</h3>
+                                </div>                              
+                                <div class="q6-attributes-container">
+                                       
+                                    <div class="q6-api__attributes-box">                            
+                                        <div class="q6-api__attributes-content q6-api-instructions-container">
+                                            <div>
+                                                <p>token</p>
+                                                <div>required</div>
+                                            </div>
+                                            <div>
+                                                <p>Lorem ipsum dolor sit amet, <span class="q6-blue-text">consectetur</span> adipisicing elit. Quibusdam, id</p>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>    
+
+                                 
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                                    
+
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                
+                    
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="Reference_1">Some data</h2>
+                            </div>
+                            
+                            
+                            <div class="q6-api-instructions-container">
+                                <div class="q6-api-parameter">/v1/create_task</div>
+                            </div> 
+                                  
+
+                            
+                            <div class="q6-api-instructions-container">
+                                <p>Lorem ipsum dolor sit amet, <span class="q6-blue-text">consectetur</span> adipisicing elit. Fugit cupiditate numquam, totam nisi reprehenderit <span class="q6-blue-text">consectetur</span> ducimus sequi. Voluptates, ullam eum, odio explicabo vero necessitatibus earum consequuntur accusantium, exercitationem impedit omnis.</p>
+                            </div> 
+                                     
+
+                              
+                                <div class="q6-api-instructions-container">
+                                    <h3>attributes</h3>
+                                </div>                              
+                                <div class="q6-attributes-container">
+                                       
+                                    <div class="q6-api__attributes-box">                            
+                                        <div class="q6-api__attributes-content q6-api-instructions-container">
+                                            <div>
+                                                <p>token</p>
+                                                <div>required</div>
+                                            </div>
+                                            <div>
+                                                <p>Lorem ipsum dolor sit amet, <span class="q6-blue-text">consectetur</span> adipisicing elit. Quibusdam, id</p>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                       
+                                    <div class="q6-api__attributes-box">                            
+                                        <div class="q6-api__attributes-content q6-api-instructions-container">
+                                            <div>
+                                                <p>query</p>
+                                                <div>required</div>
+                                            </div>
+                                            <div>
+                                                <p><span class="q6-blue-text">JSON object</span> containing the details of transcoding job to be started. See example and description of query object properties below.</p>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                       
+                                    <div class="q6-api__attributes-box">                            
+                                        <div class="q6-api__attributes-content q6-api-instructions-container">
+                                            <div>
+                                                <p>token_3</p>
+                                                <div>optional</div>
+                                            </div>
+                                            <div>
+                                                <p>Lorem ipsum dolor sit amet, <span class="q6-blue-text">consectetur</span> adipisicing</p>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>    
+
+                                
+                                <div class="q6-api-instructions-container">
+                                    <h4>Example of JSON object for query param</h4>
+                                    <pre><code> {
+  "query": {
+      "source": "https://example.com/myvideo.mp4",
+      "format": [
+      {
+          "output": "mp4",
+          "destination": "",
+          "file_extension": "mp4",
+          "size": "320x240",
+          "rotate": "90",
+          "framerate": "25",
+          "bitrate": "300",
+          "pix_format": "yuv420p",
+          "profile": "main",
+          "video_codec_parameters": {
+          "vprofile": "baseline",
+          "level": "31",
+          "coder": "0",
+          "flags2": "-bpyramid+fastpskip-dct8x8",
+          "partitions": "+parti8x8+parti4x4+partp8x8+partb8x8",
+          "directpred": "2",
+          "me_method": "hex"
+          },
+          "audio_bitrate": "64",
+          "audio_sample_rate": "44100",
+          "audio_channels_number": "2"
+      },
+      {
+          "output": "advanced_hls",
+          "destination": "",
+          "segment_duration": "4",
+          "stream": [
+          {
+              "size": "320x240",
+              "rotate": "180",
+              "framerate": "30",
+              "bitrate": "300",
+              "pix_format": "yuv420p",
+              "profile": "main",
+              "video_codec_parameters": {
+              "vprofile": "baseline",
+              "level": "31",
+              "coder": "0",
+              "flags2": "-bpyramid+fastpskip-dct8x8",
+              "partitions": "+parti8x8+parti4x4+partp8x8+partb8x8",
+              "directpred": "2",
+              "me_method": "hex"
+              },
+              "audio_bitrate": "64",
+              "audio_sample_rate": "44100",
+              "audio_channels_number": "2"
+          },
+          {
+              "size": "160x120",
+              "bitrate": "150",
+              "keyframe": "60",
+              "profile": "main"
+          }
+          ]
+      }
+      ]
+  }
+}    </code></pre>
+                                </div>
+                                 
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                <p>Lorem ipsum dolor sit amet, consectetur <span class="q6-blue-text">consectetur</span> elit. Cum atque autem rerum non, facilis adipisci similique sunt ea dignissimos laboriosam ullam modi quis, beatae est animi debitis iure! Ducimus, perspiciatis.</p>
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Request example</h2>
+                                    
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, aspernatur! Ullam nesciunt, placeat delectus similique molestiae animi quos. Id aliquid, suscipit sunt laudantium consequatur. Laudantium nisi exercitationem aspernatur magni soluta.</p>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "token" : "1357924680",
+  "expire" : "2017-12-31 23:59:59"
+}
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="ruby">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># The Greeter class
+class Greeter
+  def initialize(name)
+      @name = name.capitalize
+  end
+
+  def salute
+      puts "Hello #{@name}!"
+  end
+end
+
+g = Greeter.new("world")
+g.salute
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="python">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@requires_authorization
+def somefunc(param1='', param2=0):
+  r'''A docstring'''
+  if param1 &gt; param2: # interesting
+      print 'Greater'
+  return (param2 - param1 + 1 + 0b10l) or None
+
+class SomeClass:
+  pass
+
+&gt;&gt;&gt; message = '''interpreter
+... prompt'''
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="php">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+  <span class="nv">$r</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">(</span><span class="s1">'http://example.com/feed.rss'</span><span class="p">,</span> <span class="nx">HttpRequest</span><span class="o">::</span><span class="na">METH_GET</span><span class="p">);</span>
+  <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">setOptions</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'lastmodified'</span> <span class="o">=&gt;</span> <span class="nb">filemtime</span><span class="p">(</span><span class="s1">'local.rss'</span><span class="p">)));</span>
+  <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">addQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'category'</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">));</span>
+  <span class="k">try</span> <span class="p">{</span>
+      <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nv">$r</span><span class="o">-&gt;</span><span class="na">getResponseCode</span><span class="p">()</span> <span class="o">==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nb">file_put_contents</span><span class="p">(</span><span class="s1">'local.rss'</span><span class="p">,</span> <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">getResponseBody</span><span class="p">());</span>
+      <span class="p">}</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="javascript">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function $initHighlight(block, cls) {
+      try {
+          if (cls.search(/\bno\-highlight\b/) != -1)
+          return process(block, true, 0x0F) +
+                  ` class="${cls}"`;
+      } catch (e) {
+          /* handle exception */
+      }
+      for (var i = 0 / 2; i &lt; classes.length; i++) {
+          if (checkCondition(classes[i]) === undefined)
+          console.log('undefined');
+      }
+}
+
+export  $initHighlight;
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                    
+                                    <p class="q6-api-example-warning">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus quibusdam doloribus natus aspernatur nisi unde, alias quos sed culpa, praesentium nesciunt. Dolorem soluta similique quis, iste laboriosam est omnis? Blanditiis!</p>
+                                        
+
+                                </div>
+                                    
+
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Response example</h2>
+                                    
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur consequatur obcaecati officia necessitatibus deleniti mollitia cumque, veniam, iure reprehenderit fugit! Saepe veniam tempora fuga accusantium quidem numquam suscipit atque debitis.</p>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "token" : "1357924680",
+  "expire" : "2017-12-31 23:59:59"
+}
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="ruby">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># The Greeter class
+class Greeter
+  def initialize(name)
+      @name = name.capitalize
+  end
+
+  def salute
+      puts "Hello #{@name}!"
+  end
+end
+
+g = Greeter.new("world")
+g.salute
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="python">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@requires_authorization
+def somefunc(param1='', param2=0):
+  r'''A docstring'''
+  if param1 &gt; param2: # interesting
+      print 'Greater'
+  return (param2 - param1 + 1 + 0b10l) or None
+
+class SomeClass:
+  pass
+
+&gt;&gt;&gt; message = '''interpreter
+... prompt'''
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="php">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+  <span class="nv">$r</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">(</span><span class="s1">'http://example.com/feed.rss'</span><span class="p">,</span> <span class="nx">HttpRequest</span><span class="o">::</span><span class="na">METH_GET</span><span class="p">);</span>
+  <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">setOptions</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'lastmodified'</span> <span class="o">=&gt;</span> <span class="nb">filemtime</span><span class="p">(</span><span class="s1">'local.rss'</span><span class="p">)));</span>
+  <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">addQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'category'</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">));</span>
+  <span class="k">try</span> <span class="p">{</span>
+      <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nv">$r</span><span class="o">-&gt;</span><span class="na">getResponseCode</span><span class="p">()</span> <span class="o">==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nb">file_put_contents</span><span class="p">(</span><span class="s1">'local.rss'</span><span class="p">,</span> <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">getResponseBody</span><span class="p">());</span>
+      <span class="p">}</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="javascript">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function $initHighlight(block, cls) {
+      try {
+          if (cls.search(/\bno\-highlight\b/) != -1)
+          return process(block, true, 0x0F) +
+                  ` class="${cls}"`;
+      } catch (e) {
+          /* handle exception */
+      }
+      for (var i = 0 / 2; i &lt; classes.length; i++) {
+          if (checkCondition(classes[i]) === undefined)
+          console.log('undefined');
+      }
+}
+
+export  $initHighlight;
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                    
+                                    <p class="q6-api-example-warning">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus atque doloribus, asperiores explicabo qui autem nulla, placeat, optio excepturi accusantium dicta, id perspiciatis cupiditate sequi earum laboriosam. Quis, inventore, eius.</p>
+                                        
+
+                                </div>
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="Reference_2">Super great post</h2>
+                            </div>
+                            
+                            
+                            <div class="q6-api-instructions-container">
+                                <div class="q6-api-parameter">/v1/create_token</div>
+                            </div> 
+                                  
+
+                            
+                            <div class="q6-api-instructions-container">
+                                <p>Lorem ipsum dolor sit amet, <span class="q6-blue-text">consectetur</span> adipisicing elit. Fugit cupiditate numquam, totam nisi reprehenderit <span class="q6-blue-text">consectetur</span> ducimus sequi. Voluptates, ullam eum, odio explicabo vero necessitatibus earum consequuntur accusantium, exercitationem impedit omnis.</p>
+                            </div> 
+                                     
+
+                              
+                                <div class="q6-api-instructions-container">
+                                    <h3>attributes</h3>
+                                </div>                              
+                                <div class="q6-attributes-container">
+                                       
+                                    <div class="q6-api__attributes-box">                            
+                                        <div class="q6-api__attributes-content q6-api-instructions-container">
+                                            <div>
+                                                <p>token</p>
+                                                <div>required</div>
+                                            </div>
+                                            <div>
+                                                <p>Lorem ipsum dolor sit amet, <span class="q6-blue-text">consectetur</span> adipisicing elit. Quibusdam, id</p>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                       
+                                    <div class="q6-api__attributes-box">                            
+                                        <div class="q6-api__attributes-content q6-api-instructions-container">
+                                            <div>
+                                                <p>token_2</p>
+                                                <div>required</div>
+                                            </div>
+                                            <div>
+                                                <p>sit amet, <span class="q6-blue-text">consectetur</span> adipisicing elit. Quibusdam, id</p>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>    
+
+                                 
+
+                                                                               
+
+                            <div class="q6-api-instructions-container">
+                                <p>Lorem ipsum dolor sit amet, consectetur <span class="q6-blue-text">consectetur</span> elit. Cum atque autem rerum non, facilis adipisci similique sunt ea dignissimos laboriosam ullam modi quis, beatae est animi debitis iure! Ducimus, perspiciatis.</p>
+
+<p>Lorem <span class="q6-blue-text">consectetur</span> dolor sit amet, consectetur elit. Cum atque autem rerum non, <span class="q6-blue-text">consectetur</span> adipisci similique sunt ea dignissimos</p>
+
+
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Request example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "token" : "1357924680",
+  "expire" : "2017-12-31 23:59:59"
+}
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="ruby">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># The Greeter class
+class Greeter
+  def initialize(name)
+      @name = name.capitalize
+  end
+
+  def salute
+      puts "Hello #{@name}!"
+  end
+end
+
+g = Greeter.new("world")
+g.salute
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="python">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@requires_authorization
+def somefunc(param1='', param2=0):
+  r'''A docstring'''
+  if param1 &gt; param2: # interesting
+      print 'Greater'
+  return (param2 - param1 + 1 + 0b10l) or None
+
+class SomeClass:
+  pass
+
+&gt;&gt;&gt; message = '''interpreter
+... prompt'''
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="php">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+  <span class="nv">$r</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">(</span><span class="s1">'http://example.com/feed.rss'</span><span class="p">,</span> <span class="nx">HttpRequest</span><span class="o">::</span><span class="na">METH_GET</span><span class="p">);</span>
+  <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">setOptions</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'lastmodified'</span> <span class="o">=&gt;</span> <span class="nb">filemtime</span><span class="p">(</span><span class="s1">'local.rss'</span><span class="p">)));</span>
+  <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">addQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'category'</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">));</span>
+  <span class="k">try</span> <span class="p">{</span>
+      <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nv">$r</span><span class="o">-&gt;</span><span class="na">getResponseCode</span><span class="p">()</span> <span class="o">==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nb">file_put_contents</span><span class="p">(</span><span class="s1">'local.rss'</span><span class="p">,</span> <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">getResponseBody</span><span class="p">());</span>
+      <span class="p">}</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="javascript">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function $initHighlight(block, cls) {
+      try {
+          if (cls.search(/\bno\-highlight\b/) != -1)
+          return process(block, true, 0x0F) +
+                  ` class="${cls}"`;
+      } catch (e) {
+          /* handle exception */
+      }
+      for (var i = 0 / 2; i &lt; classes.length; i++) {
+          if (checkCondition(classes[i]) === undefined)
+          console.log('undefined');
+      }
+}
+
+export  $initHighlight;
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                    
+
+                            
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Response example</h2>
+                                       
+
+                                                                        
+                                    <div class="q6-api-example__language" data-example="curl">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "token" : "1357924680",
+  "expire" : "2017-12-31 23:59:59"
+}
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="ruby">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># The Greeter class
+class Greeter
+  def initialize(name)
+      @name = name.capitalize
+  end
+
+  def salute
+      puts "Hello #{@name}!"
+  end
+end
+
+g = Greeter.new("world")
+g.salute
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="python">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@requires_authorization
+def somefunc(param1='', param2=0):
+  r'''A docstring'''
+  if param1 &gt; param2: # interesting
+      print 'Greater'
+  return (param2 - param1 + 1 + 0b10l) or None
+
+class SomeClass:
+  pass
+
+&gt;&gt;&gt; message = '''interpreter
+... prompt'''
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="php">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+  <span class="nv">$r</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpRequest</span><span class="p">(</span><span class="s1">'http://example.com/feed.rss'</span><span class="p">,</span> <span class="nx">HttpRequest</span><span class="o">::</span><span class="na">METH_GET</span><span class="p">);</span>
+  <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">setOptions</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'lastmodified'</span> <span class="o">=&gt;</span> <span class="nb">filemtime</span><span class="p">(</span><span class="s1">'local.rss'</span><span class="p">)));</span>
+  <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">addQueryData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'category'</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">));</span>
+  <span class="k">try</span> <span class="p">{</span>
+      <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nv">$r</span><span class="o">-&gt;</span><span class="na">getResponseCode</span><span class="p">()</span> <span class="o">==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nb">file_put_contents</span><span class="p">(</span><span class="s1">'local.rss'</span><span class="p">,</span> <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">getResponseBody</span><span class="p">());</span>
+      <span class="p">}</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">HttpException</span> <span class="nv">$ex</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">echo</span> <span class="nv">$ex</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+                                    </div>
+                                                                        
+                                    <div class="q6-api-example__language" data-example="javascript">
+                                        
+
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function $initHighlight(block, cls) {
+      try {
+          if (cls.search(/\bno\-highlight\b/) != -1)
+          return process(block, true, 0x0F) +
+                  ` class="${cls}"`;
+      } catch (e) {
+          /* handle exception */
+      }
+      for (var i = 0 / 2; i &lt; classes.length; i++) {
+          if (checkCondition(classes[i]) === undefined)
+          console.log('undefined');
+      }
+}
+
+export  $initHighlight;
+</code></pre></div></div>
+
+                                    </div>
+                                    
+
+                                        
+
+                                </div>
+                                                                                    
+                        </div>                                                
+                    </section>
+                    
+                
+                       
+                <section class="q6-api-content__footer">
+                    <div></div>
+                    <div class="q6-api-content__example"></div>
+                </section>               
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $('.q6-api-content__example pre code').each(function(i, block) {
+                        hljs.highlightBlock(block);
+                    });
+                });                
+            </script>
+
+        </div>
+
+    </main>
+
+  </body>
+</html>

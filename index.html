@@ -1,0 +1,134 @@
+---
+layout: default
+title: Qencode Documentation
+---
+
+        <div class="q6-api-container">
+
+            {% include sidebar.html %}
+
+            <div class="q6-api-content">
+
+                {% include languagesbar.html %}
+
+                <!--Sections are generated based on documents in collection-->
+
+                {% assign sorted_collections = site.collections | sort: "position" %}
+                {% for collection in sorted_collections %}
+                    {% assign sorted_docs = collection.docs | sort: "position" %}
+                    {% for doc in sorted_docs %}
+                    <section>
+                        <div class="q6-api-content__instructions">
+                            <div class="q6-api-instructions-container">
+                                <h2 id="{{ collection.title }}_{{ doc.position }}">{{ doc.title }}</h2>
+                            </div>
+                            
+                            {% if doc.request %}
+                            <div class="q6-api-instructions-container">
+                                <div class="q6-api-parameter">{{ doc.request }}</div>
+                            </div> 
+                            {% endif %}      
+
+                            {% if doc.main_message %}
+                            <div class="q6-api-instructions-container">
+                                <p>{{ doc.main_message }}</p>
+                            </div> 
+                            {% endif %}         
+
+                            {% if doc.attributes %}  
+                                <div class="q6-api-instructions-container">
+                                    <h3>attributes</h3>
+                                </div>                              
+                                <div class="q6-attributes-container">
+                                    {% for block in doc.attributes %}   
+                                    <div class="q6-api__attributes-box">                            
+                                        <div class="q6-api__attributes-content q6-api-instructions-container">
+                                            <div>
+                                                <p>{{ block.attribute }}</p>
+                                                <div>{{ block.required }}</div>
+                                            </div>
+                                            <div>
+                                                <p>{{ block.message }}</p>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>    
+
+                                {% if doc.json_example %}
+                                <div class="q6-api-instructions-container">
+                                    <h4>{{ doc.json_example.title }}</h4>
+                                    <pre><code> {{ doc.json_example.json }}</code></pre>
+                                </div>
+                                {% endif %} 
+
+                            {% endif %}                                                   
+
+                            <div class="q6-api-instructions-container">
+                                {{ doc.content | markdownify }}
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="q6-api-content__example">
+                            {% if doc.request_examples and doc.request_examples[0].code_block %}
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Request example</h2>
+                                    {% if doc.request_examples_message %}
+                                    <p>{{ doc.request_examples_message }}</p>
+                                    {% endif %}   
+
+                                    {% for block in doc.request_examples %}                                    
+                                    <div class="q6-api-example__language" data-example="{{ block.language }}">
+                                        {% include syntax-highlight.html block=block %}
+                                    </div>
+                                    {% endfor %}
+
+                                    {% if doc.request_example_warning %}
+                                    <p class="q6-api-example-warning">{{ doc.request_example_warning }}</p>
+                                    {% endif %}    
+
+                                </div>
+                            {% endif %}        
+
+                            {% if doc.response_examples and doc.response_examples[0].code_block %}
+                                <div class="q6-api-content__example-container">
+
+                                    <h2>Response example</h2>
+                                    {% if doc.response_examples_message %}
+                                    <p>{{ doc.response_examples_message }}</p>
+                                    {% endif %}   
+
+                                    {% for block in doc.response_examples %}                                    
+                                    <div class="q6-api-example__language" data-example="{{ block.language }}">
+                                        {% include syntax-highlight.html block=block %}
+                                    </div>
+                                    {% endfor %}
+
+                                    {% if doc.response_example_warning %}
+                                    <p class="q6-api-example-warning">{{ doc.response_example_warning }}</p>
+                                    {% endif %}    
+
+                                </div>
+                            {% endif %}                                                        
+                        </div>                                                
+                    </section>
+                    {% endfor %}
+                {% endfor %}
+                       
+                <section class="q6-api-content__footer">
+                    <div></div>
+                    <div class="q6-api-content__example"></div>
+                </section>               
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $('.q6-api-content__example pre code').each(function(i, block) {
+                        hljs.highlightBlock(block);
+                    });
+                });                
+            </script>
+
+        </div>

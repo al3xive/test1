@@ -1,0 +1,7 @@
+{% capture highlight %}
+```
+{{ include.block.code_block }}
+```
+{% endcapture %}
+
+{{ highlight | markdownify }}

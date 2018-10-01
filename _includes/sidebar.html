@@ -1,0 +1,116 @@
+<div id="sidebar-switcher" class="q6-api-sidebar__switcher"></div>
+<script>
+    $(function () {   
+        $("#sidebar-switcher").on('click', function(){
+            $("#sidebar").toggleClass("q6-api-open-menu");
+            $(this).toggleClass("q6-api-switcher-activated");
+        });                         
+
+        $(function () {    
+            $(document).click(function(e) {
+                var sidebarClicked = $(e.target).closest("#sidebar").attr('id');
+                var switcherClicked = e.target.id;
+
+                if(switcherClicked != "sidebar-switcher" && !sidebarClicked){
+                    // console.log("switched outsite switcher and outside sidebar");
+
+                    $("#sidebar").removeClass("q6-api-open-menu");
+                    $("#sidebar-switcher").removeClass("q6-api-switcher-activated");                                 
+                }                    
+            });
+        });                      
+    });                                       
+</script>
+
+<div class="q6-api-sidebar" id="sidebar">    
+
+	{% assign sorted_collections = site.collections | sort: "position" %}
+	{% for collection in sorted_collections %}
+        <section>
+            <h1 class="q6-api-section-title">{{ collection.title }}</h1>
+            <div class="q6-sidebar-menu__links">
+                {% assign sorted_docs = collection.docs | sort: "position" %}
+                {% for doc in sorted_docs %}
+                    <a class="q6-link" href="#{{ collection.title }}_{{ doc.position }}">{{ doc.title }}</a> 
+                {% endfor %}                                               
+            </div>            
+        </section>
+	{% endfor %}    
+
+    <!--<section>
+        <h1 class="q6-api-section-title">Introduction</h1>
+        <div class="q6-sidebar-menu__links">
+            <a class="q6-link" href="#section_one__problem_one">Problem One</a>              
+            <a class="q6-link" href="#section_one__problem_two">Problem Two</a>                                                 
+        </div>
+    </section>  
+
+    <section>
+        <h1 class="q6-api-section-title">Reference</h1>
+        <div class="q6-sidebar-menu__links">
+            <a class="q6-link" href="#section_two__problem_one">Problem One</a>               
+            <a class="q6-link" href="#section_two__problem_two">Problem Two</a>                                             
+        </div>
+    </section>  -->
+
+    <script>
+
+        // toggle when menu link is selected
+        // q6-sidebar-menu__selected-link
+        // q6-sidebar-menu__links
+        $(function () {  
+            $('.q6-sidebar-menu__links > .q6-link').each(function(index){
+                $(this).click(function(){
+                    // find all selected submenu link and remove selected class
+                    $(".q6-sidebar-menu__links > .q6-sidebar-menu__selected-link").removeClass("q6-sidebar-menu__selected-link");
+                    $(this).addClass("q6-sidebar-menu__selected-link");                                                         
+                });         
+            });                           
+        });                       
+            
+        // scroll when menu links clicked
+        $(function () {
+            $(".q6-sidebar-menu__links > .q6-link").click(function(e) { 
+                e.preventDefault(); 
+
+                try {
+
+                    var extraScroll = 0;
+                    if($('#languageMenuBar').is(':visible')){
+                        extraScroll = 60;
+                    }
+
+                    var dest = $(this).attr('href'); 
+                    $('html,body').animate({
+                        scrollTop: $(dest).offset().top - $("#top_menu").height() - 25 - extraScroll
+                    }, 250, "swing", function() {
+                        // Animation complete.
+                        $("#sidebar").removeClass("q6-api-open-menu");
+                        $("#sidebar-switcher").removeClass("q6-api-switcher-activated");                                    
+                    });   
+                }
+                catch(err) {
+                    console.log(err.message);
+                }    
+
+
+            }); 
+        });                                       
+    </script>
+
+</div>
+
+<script>
+    $(function () {  
+        // calculated position of sidebar based on top menu hight
+
+        updateSidebarTopPosition();
+
+        $(window).resize(updateSidebarTopPosition);                
+
+        function updateSidebarTopPosition(){
+            var topMenuHeight = $('#top_menu').height();
+            $("#sidebar").css("top", topMenuHeight + "px");
+        }
+    });   
+</script>
