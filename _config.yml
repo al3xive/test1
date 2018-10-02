@@ -1,21 +1,21 @@
 collections_dir: collections    
 collections:
-  overview:
-    title: Overview
-    position: 1
-  tutorials:
-    title: Tutorials
-    position: 2
+  # overview:
+  #   title: Overview
+  #   position: 1
+  # tutorials:
+  #   title: Tutorials
+  #   position: 2
   apireference:
     title: API Reference
     position: 3
     output: false
-  apiclients:
-    title: API Clients
-    position: 4
-  introduction:
-    title: introduction
-    position: 5
-  reference:
-    title: Reference
-    position: 6
+  # apiclients:
+  #   title: API Clients
+  #   position: 4
+  # introduction:
+  #   title: Introduction
+  #   position: 5
+  # reference:
+  #   title: Reference
+  #   position: 6

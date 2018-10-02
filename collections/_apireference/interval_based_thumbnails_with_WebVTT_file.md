@@ -1,11 +1,10 @@
 ---
 title: Interval-based Thumbnails
-position: 8
+position: 19
 request: /v1/create_token
-main_message: Example below specifies creation of 320x240 size thumbnails at each 30 seconds of a video.
-  Thumbnails and WebVTT file will be saved into the folder specified in “url” attribute of “destination” object.
+main_message: This method is responsible for creating an interval-based thumbnails. The example below demonstrates creation of 320x240 thumbnails at every 30 seconds of a video's timeline. Thumbnails and WebVTT file will be saved into the directory specified in the “url” attribute of “destination” object.
 
-request_examples:
+request_examples: 
   - code_block: |2-
       {
         "output" : "thumbnails",
@@ -20,7 +19,7 @@ request_examples:
         "height" : 240
       }
 
-    language: json
+    language: curl
   
   - code_block: |2-
       curl https://api.qencode.com/v1/start_encode2 \
@@ -56,7 +55,7 @@ request_examples:
           }
         } 
 
-    language: json
+    language: curl
 
 response_examples:
   - code_block: |2-

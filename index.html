@@ -20,7 +20,7 @@ title: Qencode Documentation
                     <section>
                         <div class="q6-api-content__instructions">
                             <div class="q6-api-instructions-container">
-                                <h2 id="{{ collection.title }}_{{ doc.position }}">{{ doc.title }}</h2>
+                                <h2 id="{{ collection.position }}_{{ doc.position }}">{{ doc.title }}</h2>
                             </div>
                             
                             {% if doc.request %}
@@ -74,13 +74,15 @@ title: Qencode Documentation
                             {% if doc.request_examples and doc.request_examples[0].code_block %}
                                 <div class="q6-api-content__example-container">
 
-                                    <h2>Request example</h2>
-                                    {% if doc.request_examples_message %}
-                                    <p>{{ doc.request_examples_message }}</p>
-                                    {% endif %}   
 
                                     {% for block in doc.request_examples %}                                    
                                     <div class="q6-api-example__language" data-example="{{ block.language }}">
+
+                                        <h2>Request example</h2>
+                                        {% if doc.request_examples_message %}
+                                        <p>{{ doc.request_examples_message }}</p>
+                                        {% endif %}   
+
                                         {% include syntax-highlight.html block=block %}
                                     </div>
                                     {% endfor %}
@@ -95,13 +97,14 @@ title: Qencode Documentation
                             {% if doc.response_examples and doc.response_examples[0].code_block %}
                                 <div class="q6-api-content__example-container">
 
-                                    <h2>Response example</h2>
-                                    {% if doc.response_examples_message %}
-                                    <p>{{ doc.response_examples_message }}</p>
-                                    {% endif %}   
-
                                     {% for block in doc.response_examples %}                                    
                                     <div class="q6-api-example__language" data-example="{{ block.language }}">
+
+                                        <h2>Response example</h2>
+                                        {% if doc.response_examples_message %}
+                                        <p>{{ doc.response_examples_message }}</p>
+                                        {% endif %} 
+
                                         {% include syntax-highlight.html block=block %}
                                     </div>
                                     {% endfor %}

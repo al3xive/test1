@@ -31,7 +31,7 @@
             <div class="q6-sidebar-menu__links">
                 {% assign sorted_docs = collection.docs | sort: "position" %}
                 {% for doc in sorted_docs %}
-                    <a class="q6-link" href="#{{ collection.title }}_{{ doc.position }}">{{ doc.title }}</a> 
+                    <a class="q6-link" href="#{{ collection.position }}_{{ doc.position }}">{{ doc.title }}</a> 
                 {% endfor %}                                               
             </div>            
         </section>

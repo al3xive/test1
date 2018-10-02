@@ -1,8 +1,8 @@
 ---
 title: Adding logo/watermark
-position: 3
+position: 13
 request: /v1/create_token
-main_message: This route is for adding logo or watermark to output video. An object describing logo / watermark should be inserted into “format” element.
+main_message: This route is used for adding logo or watermark to an output video. An object that describes logo/watermark should be inserted into the <span class="q6-blue-text">“format”</span> element.
 attributes:
   - attribute: token
     required: required
@@ -27,11 +27,5 @@ response_examples:
   - code_block: |2-
       {"error":0,"upload_url":"https:\/\/storage.qencode.com\/v1\/upload_file","task_token":"471272a512d76c22665db9dcee893409"}
 
-    language: curl
-  - code_block: |2-
-      {
-        "success": false,
-        "result": null
-      }
-    language: curl
+    language: json
 ---

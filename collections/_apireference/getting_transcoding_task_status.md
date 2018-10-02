@@ -1,6 +1,6 @@
 ---
 title: Getting Transcoding Task Status
-position: 7
+position: 16
 request: /v1/create_token
 main_message: This route is for inquiring a transcoding task status.
 

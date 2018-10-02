@@ -1,6 +1,6 @@
 ---
 title: Stitching videos with /v1/start_encode2
-position: 1
+position: 15
 request: /v1/start_encode2
 main_message: This route is for stitching videos using /v1/start_encode2 method.
 attributes:
@@ -32,7 +32,7 @@ request_examples:
             "level": "41"
             }
           ]
-    language: json
+    language: curl
 
 response_examples:
   - code_block: |2-
